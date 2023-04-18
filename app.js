@@ -135,12 +135,18 @@ class JobsCard {
         })
     }
 
-    // filterJobs(job) {
-    //     getData('http://localhost:3000/jobs')
-    //     .then(data => {
-    //         data.forEach(item => console.log(item.id = 1))
-    //     })
-    // }
+    filterJobs(job) {
+        getData('http://localhost:3000/jobs')
+        .then(data => {
+            data.forEach(item => {
+                if (item.languages[0] === 'HTML') {
+                    console.log(item)
+                }else {
+
+                }
+            })
+        })
+    }
 } 
 
 const getData = async (url) => {
