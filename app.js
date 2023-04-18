@@ -1,72 +1,158 @@
-const skillTags = document.querySelectorAll('.skill-tag'),
-      tags = document.querySelector('#tags')
 
-
-const skills = []
-let i = 0
-
-tags.innerHTML = ''
-
-skillTags.forEach(item => {
-    item.addEventListener('click', () => addTag(item))
-})
-
-function addTag(item) {
-    if (item.classList.contains('active')) {
-        item.classList.remove('active')
-    }else {
-        item.classList.add('active')
+class JobsCard {
+    constructor(id, company, logo, newPost, featured, position, role, level, postedAt, contract, location, languages, tools, container) {
+        this.id = id
+        this.company = company
+        this.logo = logo
+        this.newPost = newPost
+        this.featured = featured
+        this.position = position
+        this.role = role
+        this.level = level
+        this.postedAt = postedAt
+        this.contract = contract
+        this.location = location
+        this.languages = languages
+        this.tools = tools
+        this.container = container
     }
 
-    const tag = item.innerHTML.replace(/\s/gi, '')
 
+    render() {
+        const container = document.querySelector(`${this.container}`)
 
+        container.innerHTML += `
+        <div class="job d-flex ${this.checkActiveNew()}">
+        <div class="info d-flex">
+          <div class="logo">
+            <img src="${this.logo}" alt="" width="65">
+          </div>
 
-    skills.push(tag)
-    renderTags(tag.id)
-}
+          <div class="info-text">
+            <div class="top-info  d-flex">
+              <p class="name">${this.company}</p>
 
-function renderTags() {
-    let html = ''
-    for (let i = 0; i < skills.length; i++) {
-    html += `
-        <div class="top-tag d-flex">
-            ${skills[i]}
-            <img src="images/icon-remove.svg" alt="" class="remove">
+              <div class="info-tags  d-flex">
+              ${this.checkNew()}
+              ${this.checkFeature()}
+              </div>
+
+            </div>
+
+            <h4 class="job-name">${this.position}</h4>
+
+            <div class="btm-info d-flex">
+              <div class="bottom-info">
+                ${this.postedAt}
+              </div>
+              <div class="bottom-info">
+                ${this.contract}
+              </div>
+              <div class="bottom-info">
+                ${this.location}
+              </div>
+            </div>
+          </div>
+
         </div>
-    `
+
+        <div class="skill-tags d-flex">
+            ${this.renderLanguages()}
+            ${this.renderTools()}
+      </div>
+        `
+
+        this.activeTag()
     }
 
-    tags.innerHTML = html
+    renderLanguages() {
+        let tags = ''
+        for (let i = 0; i < this.languages.length; i++) {
+            tags += `
+                <div class="skill-tag">
+                    ${this.languages[i]}
+                </div>
+            `
+        }
+    
+        return tags
+    }
 
-    deleteTag()
-}
+    renderTools() {
+        if (this.tools.length === 0) {
+            return ''
+        }else {
+            let tool = ''
+            for (let i = 0; i < this.tools.length; i++) {
+                tool += `
+                    <div class="skill-tag">
+                        ${this.tools[i]}
+                    </div>
+                `
+            }
+    
+            return tool  
+        }
+    }
 
+    checkNew() {
+        if (this.postedAt === '1d ago' || this.postedAt === '2d ago') {
+            return `<p class="info-tag new">NEW!</p>`
+        }
 
-function deleteTag() {
-    const removeTagBtn = document.querySelectorAll('.remove')
+        return ''
+    }
 
-    removeTagBtn.forEach(item => {
-        item.addEventListener('click', () => {
-            const tag = item.dataset.id
+    checkFeature() {
+        if (this.featured === true) {
+             return `<p class="info-tag featured">FEATURED</p>`
+        }
 
-            const tagId = skills.findIndex(item => item.title === tag)
-            skills.splice(tagId, 1)
-            renderTags()
+        return ''
+    }
+
+    checkActiveNew() {
+        if (this.newPost) {
+            return 'new-job'
+        }else {
+            return
+        }
+    }
+
+    activeTag() {
+        const tags = document.querySelectorAll('.skill-tag')
+
+        tags.forEach(item => {
+            item.addEventListener('click', () => {
+                if (item.classList.contains('active')) {
+                    item.classList.remove('active')
+                }else {
+                    item.classList.add('active')
+                }
+
+                this.filterJobs()
+            })
         })
-    })
+    }
+
+    // filterJobs(job) {
+    //     getData('http://localhost:3000/jobs')
+    //     .then(data => {
+    //         data.forEach(item => console.log(item.id = 1))
+    //     })
+    // }
+} 
+
+const getData = async (url) => {
+    const res = await fetch(url)
+
+    return await res.json()
 }
 
-//  Clear Btn
-const clearBtn = document.querySelector('.clear')
-
-clearBtn.addEventListener('click', () => {
-    tags.innerHTML = ''
-
-    skillTags.forEach(item => {
-        item.classList.remove('active')
+getData('http://localhost:3000/jobs')
+    .then(data => {
+        data.forEach(({id, company, logo, newPost, featured,position, role, level, postedAt, contract, location, languages, tools}) => {
+            new JobsCard(id, company, logo, newPost, featured,position, role, level, postedAt, contract, location, languages, tools, '.jobs').render()
+        });
     })
-})
-
-
 

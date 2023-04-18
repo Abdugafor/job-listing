@@ -43,8 +43,11 @@ body {
     background: #fff;
     box-shadow: 4px 4px 14px 4px rgba(0, 0 ,0 , 0.25);
     padding: 15px 20px;
-    border-left: 5px solid var( --Desaturated-Dark-Cyan);
     margin-top: 30px;
+}
+
+.new-job {
+    border-left: 5px solid var( --Desaturated-Dark-Cyan);
 }
 
 .skill-tag  {
@@ -63,11 +66,11 @@ body {
     font-size: 12px;
 }
 
-.info-tag:nth-child(1) {
+.new {
     background: var(--Dark-Grayish-Cyan);
 }
 
-.info-tag:nth-child(2) {
+.featured {
     background: var(--Very-Dark-Grayish-Cyan);
 }
 
@@ -147,4 +150,9 @@ body {
 .remove:hover {
     cursor: pointer;
     background:var(--Very-Dark-Grayish-Cyan);
+}
+
+.active {
+    background: var(--Desaturated-Dark-Cyan);
+    color: #fff;
 }
