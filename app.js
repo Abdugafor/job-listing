@@ -135,13 +135,6 @@ class JobsCard {
         })
     }
 
-
-    // filterJobs(job) {
-    //     getData('http://localhost:3000/jobs')
-    //     .then(data => {
-    //         data.forEach(item => console.log(item.id = 1))
-    //     })
-    // }
 } 
 
 const getData = async (url) => {
