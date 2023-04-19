@@ -194,6 +194,29 @@
         "React",
         "Sass"
       ]
+    },
+    {
+      "company": "Result School",
+      "logo": "./images/photosnap.svg",
+      "newPost": true,
+      "featured": false,
+      "position": "Junior Front-end Developer",
+      "role": "frontend",
+      "level": "Senior",
+      "postedAt": "1min ago",
+      "contract": "Half time",
+      "location": "Germany",
+      "languages": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        ""
+      ],
+      "tools": [
+        "React",
+        "Vue"
+      ],
+      "id": 11
     }
   ],
   "requests": []

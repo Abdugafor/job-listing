@@ -21,48 +21,49 @@ class JobsCard {
     render() {
         const container = document.querySelector(`${this.container}`)
 
-        container.innerHTML += `
-        <div class="job d-flex ${this.checkActiveNew()}">
-        <div class="info d-flex">
-          <div class="logo">
-            <img src="${this.logo}" alt="" width="65">
-          </div>
+        const div = document.createElement('div')
+        div.innerHTML = `
+            <div class="job d-flex ${this.checkActiveNew()}">
+            <div class="info d-flex">
+                <div class="logo">
+                    <img src="${this.logo}" alt="" width="65">
+                </div>
 
-          <div class="info-text">
-            <div class="top-info  d-flex">
-              <p class="name">${this.company}</p>
+                <div class="info-text">
+                    <div class="top-info  d-flex">
+                    <p class="name">${this.company}</p>
 
-              <div class="info-tags  d-flex">
-              ${this.checkNew()}
-              ${this.checkFeature()}
-              </div>
+                    <div class="info-tags  d-flex">
+                    ${this.checkNew()}
+                    ${this.checkFeature()}
+                    </div>
+
+                    </div>
+
+                    <h4 class="job-name">${this.position}</h4>
+
+                    <div class="btm-info d-flex">
+                    <div class="bottom-info">
+                        ${this.postedAt}
+                    </div>
+                    <div class="bottom-info">
+                        ${this.contract}
+                    </div>
+                    <div class="bottom-info">
+                        ${this.location}
+                    </div>
+                    </div>
+                </div>
 
             </div>
 
-            <h4 class="job-name">${this.position}</h4>
-
-            <div class="btm-info d-flex">
-              <div class="bottom-info">
-                ${this.postedAt}
-              </div>
-              <div class="bottom-info">
-                ${this.contract}
-              </div>
-              <div class="bottom-info">
-                ${this.location}
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="skill-tags d-flex">
-            ${this.renderLanguages()}
-            ${this.renderTools()}
-      </div>
+            <div class="skill-tags d-flex">
+                ${this.renderLanguages()}
+                ${this.renderTools()}
+             </div>
         `
+        container.append(div)
 
-        this.activeTag()
     }
 
     renderLanguages() {
@@ -96,7 +97,7 @@ class JobsCard {
     }
 
     checkNew() {
-        if (this.postedAt === '1d ago' || this.postedAt === '2d ago') {
+        if (this.postedAt === '1d ago' || this.postedAt === '2d ago' || this.postedAt === '1min ago') {
             return `<p class="info-tag new">NEW!</p>`
         }
 
@@ -130,7 +131,10 @@ class JobsCard {
                     item.classList.add('active')
                 }
 
-                this.filterJobs()
+                getData('http://localhost:3000/jobs')
+                .then(data => {
+                    console.log(data)
+                })
             })
         })
     }
@@ -178,7 +182,23 @@ form.addEventListener('submit', (e) => {
     document.querySelector('body').style.overflow = 'visible'
 
     const formData = new FormData(form)
-    const json = JSON.stringify(Object.fromEntries(formData.entries())) 
+    const obj = Object.fromEntries(formData.entries())
+    const job = {
+      company: obj.company,
+      logo: obj.logo,
+      newPost: true,
+      featured: false,
+      position: obj.position,
+      role: "frontend",
+      level:"Senior",
+      postedAt: "1min ago",
+      contract: obj.contract,
+      location: obj.location,
+      languages: obj.languages.split(' '),
+      tools: obj.tools.split(' ')
+    }
+
+    const json = JSON.stringify(job) 
 
     postData('http://localhost:3000/jobs', json)
     .finally(form.reset())
@@ -198,3 +218,5 @@ const postData = async (url, data) => {
     })
 
 }
+
+
