@@ -38,8 +38,4 @@ npx json-server data.json
 ___
 ## Screenshot
 ![app-screenshot](./images/screen.png)
-___
-## Deploy
-https://abdugafor.github.io/tip-calculator/
 
-___
