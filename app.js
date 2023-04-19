@@ -135,6 +135,7 @@ class JobsCard {
         })
     }
 
+
     // filterJobs(job) {
     //     getData('http://localhost:3000/jobs')
     //     .then(data => {
@@ -156,3 +157,51 @@ getData('http://localhost:3000/jobs')
         });
     })
 
+
+
+// Add job
+
+const btn = document.querySelector('#btn'),
+      modal = document.querySelector('.modal-block')
+
+btn.addEventListener('click', () => {
+    modal.style.display = 'block'
+    document.querySelector('body').style.overflow = 'hidden'
+})
+
+modal.addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal-block') ) {
+        modal.style.display = 'none'
+        document.querySelector('body').style.overflow = 'visible'
+    }
+})
+
+// Form of Adding job
+
+const form = document.querySelector('.form')
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    document.querySelector('body').style.overflow = 'visible'
+
+    const formData = new FormData(form)
+    const json = JSON.stringify(Object.fromEntries(formData.entries())) 
+
+    postData('http://localhost:3000/jobs', json)
+    .finally(form.reset())
+
+
+    modal.style.display = 'none'
+})
+
+
+const postData = async (url, data) => {
+    const res = await fetch(url, {
+        method: "POST",
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: data
+    })
+
+}

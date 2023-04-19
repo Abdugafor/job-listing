@@ -13,6 +13,9 @@
 <body>
     <div class="top">
       <img src="images/bg-header-desktop.svg" alt="" height="130">
+      <div class="btn-b">
+        <button type="button" class="btn" id="btn">Add job</button>
+      </div>
     </div>
 
 
@@ -30,8 +33,56 @@
       </div>
 
       <div class="jobs"></div> 
+    </div>
+
+
+    <div class="modal-block">
+      <div class="modal-container">
+        <form action="#" class="form">
+          <label for="logo">Logo:</label>
+          <select name="logo" id="logo">
+            <option value="./images/loop-studios.svg">loop-studio</option>
+            <option value="./images/photosnap.svg">photosnap</option>
+            <option value="./images/manage.svg">manage</option>
+          </select>
+          
+          <label for="name">Company name:</label>
+          <input type="text" name="company" id="name">
         
-      
+          <label for="position">Position:</label>
+          <input type="text" name="position" id="position">
+
+          <label for="languages">Languages:</label>
+          <input type="text" name="languages" id="languages">
+
+          <label for="tools">Tools:</label>
+          <input type="text" name="tools" id="tools">
+
+          <div class="select-input ">
+            <div>
+              <label for="contract">Contract:</label>
+              <select name="contract" id="contract">
+                <option value="Part time">Part-time</option>
+                <option value="Half time">Half-time</option>
+                <option value="Full time">Full-time</option>
+              </select>
+            </div>
+
+          <div>
+            <label for="location">Location:</label>
+            <select name="location" id="location">
+              <option value="USA">USA</option>
+              <option value="Russia">Russia</option>
+              <option value="England">England</option>
+              <option value="Germany">Germany</option>
+            </select>
+          </div>
+
+          </div>
+
+          <button class="btn submit-btn">Submit</button>
+        </form>
+      </div>
     </div>
 
 

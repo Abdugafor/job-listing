@@ -28,6 +28,7 @@ body {
 .container {
     max-width: 800px;
     margin: 0 auto;
+    margin-bottom: 50px;
 }
 .top img {
     width: 100%;
@@ -85,6 +86,7 @@ body {
 
 .bottom-info {
     color: var(--Dark-Grayish-Cyan);
+    margin-right: 10px;
 }
 
 .btm-info {
@@ -156,3 +158,94 @@ body {
     background: var(--Desaturated-Dark-Cyan);
     color: #fff;
 }
+
+.btn-b {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.btn {
+    position: absolute;
+    right: 0;
+    top: -50px;
+    background: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+}
+
+.btn:hover {
+    box-shadow: 4px 4px 14px 4px rgba(0, 0, 0, 0.25);
+}
+
+.modal-block {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.322);
+}
+
+.modal-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background: #fff;
+    width: fit-content;
+    padding: 30px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.form-group {
+    width: 456px;
+}
+input, select {
+    width: 90%;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border: 1px solid rgb(32, 172, 32);
+}
+
+input[type=file] {
+    border: none;
+    padding: 10px 0;
+}
+.select-input {
+    display: flex;
+}
+
+select {
+    width: 215px;
+}
+
+#contract {
+    margin-right: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.submit-btn {
+    position: inherit;
+    margin-top: 10px;
+    color: white;
+    padding: 10px 0;
+    width: 100%;
+    background:  rgb(32, 172, 32);
+}
+
