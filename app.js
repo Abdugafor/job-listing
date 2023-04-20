@@ -1,3 +1,25 @@
+// Post Get Request Functions
+
+
+const getData = async (url) => {
+    const res = await fetch(url)
+
+    return await res.json()
+}
+
+const postData = async (url, data) => {
+    const res = await fetch(url, {
+        method: "POST",
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: data
+    })
+
+}
+
+// Main
+
 
 class JobsCard {
     constructor(id, company, logo, newPost, featured, position, role, level, postedAt, contract, location, languages, tools, container) {
@@ -19,10 +41,9 @@ class JobsCard {
 
 
     render() {
-        const container = document.querySelector(`${this.container}`)
+        const container = document.querySelector('.jobs')
 
-        const div = document.createElement('div')
-        div.innerHTML = `
+       container.innerHTML  += `
             <div class="job d-flex ${this.checkActiveNew()}">
             <div class="info d-flex">
                 <div class="logo">
@@ -62,8 +83,6 @@ class JobsCard {
                 ${this.renderTools()}
              </div>
         `
-        container.append(div)
-
     }
 
     renderLanguages() {
@@ -130,30 +149,26 @@ class JobsCard {
                 }else {
                     item.classList.add('active')
                 }
-
-                getData('http://localhost:3000/jobs')
-                .then(data => {
-                    console.log(data)
-                })
             })
         })
+        
     }
 
 } 
 
-const getData = async (url) => {
-    const res = await fetch(url)
 
-    return await res.json()
-}
 
 getData('http://localhost:3000/jobs')
     .then(data => {
-        data.forEach(({id, company, logo, newPost, featured,position, role, level, postedAt, contract, location, languages, tools}) => {
-            new JobsCard(id, company, logo, newPost, featured,position, role, level, postedAt, contract, location, languages, tools, '.jobs').render()
-        });
+        renderJobs(data)
     })
 
+
+function renderJobs(data) {
+    data.forEach(({id, company, logo, newPost, featured,position, role, level, postedAt, contract, location, languages, tools}) => {
+        new JobsCard(id, company, logo, newPost, featured,position, role, level, postedAt, contract, location, languages, tools, '.jobs').render()
+    });
+}
 
 
 // Add job
@@ -208,15 +223,6 @@ form.addEventListener('submit', (e) => {
 })
 
 
-const postData = async (url, data) => {
-    const res = await fetch(url, {
-        method: "POST",
-        headers: {
-            'Content-type': 'application/json'
-        },
-        body: data
-    })
 
-}
 
 
